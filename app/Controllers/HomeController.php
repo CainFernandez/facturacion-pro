@@ -2,11 +2,14 @@
 
 namespace App\Controllers;
 
-class HomeController
+use Core\Controller;
+
+class HomeController extends Controller
 {
 
     public function index()
     {
-        echo "🔥 MVC PRO funcionando";
+
+        return $this->view('home');
     }
 }
