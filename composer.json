@@ -1,0 +1,16 @@
+{
+    "name": "caina/facturacion-pro",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/"
+        }
+    },
+    "authors": [
+        {
+            "name": "CainP",
+            "email": "65930136+CainFernandez@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
