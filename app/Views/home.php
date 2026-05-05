@@ -7,7 +7,9 @@
 
 <body>
 
-    <h1>🔥 Bienvenido a tu sistema PRO</h1>
+    <h1>🔥 Bienvenido al sistema PRO</h1>
+
+    <p>Ya tienes layout profesional funcionando.</p>
 
 </body>
 
