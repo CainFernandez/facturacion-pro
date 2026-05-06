@@ -1,16 +1,20 @@
-<!DOCTYPE html>
-<html>
+<h1>📊 Dashboard</h1>
 
-<head>
-    <title>Facturación PRO</title>
-</head>
+<div class="dashboard">
 
-<body>
+    <div class="card">
+        <h3>Usuarios</h3>
+        <p>120 registrados</p>
+    </div>
 
-    <h1>🔥 Bienvenido al sistema PRO</h1>
+    <div class="card">
+        <h3>Ventas</h3>
+        <p>$5,200</p>
+    </div>
 
-    <p>Ya tienes layout profesional funcionando.</p>
+    <div class="card">
+        <h3>Productos</h3>
+        <p>80 disponibles</p>
+    </div>
 
-</body>
-
-</html>
+</div>
