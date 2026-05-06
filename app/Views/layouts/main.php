@@ -2,6 +2,14 @@
 
 <?php require_once __DIR__ . '/../partials/header.php'; ?>
 
-<?php require_once $viewPath; ?>
+<div style="display:flex;">
+
+    <?php require_once __DIR__ . '/../partials/sidebar.php'; ?>
+
+    <main style="flex:1; padding:20px;">
+        <?php require_once $viewPath; ?>
+    </main>
+
+</div>
 
 <?php require_once __DIR__ . '/../partials/footer.php'; ?>
