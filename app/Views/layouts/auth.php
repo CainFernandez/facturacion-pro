@@ -1,4 +1,6 @@
-<?php /** @var string $viewPath */ ?>
+<?php
+
+/** @var string $viewPath */ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +21,7 @@
 
     </div>
 
+    <script src="<?= BASE_URL ?>/assets/js/auth/login.js"></script>
 </body>
 
 </html>

@@ -5,29 +5,43 @@
         <p>Inicia sesión para continuar</p>
     </div>
 
-    <form method="POST" action="<?= BASE_URL ?>/login" class="login-form">
+    <form method="POST" action="<?= BASE_URL ?>/login" class="login-form" id="loginForm">
 
         <div class="form-group">
-            <label>Email</label>
+            <label>Email o Usuario</label>
 
             <input
-                type="email"
-                name="email"
+                type="text"
+                name="login"
+                id="loginInput"
                 placeholder="admin@test.com"
                 required>
         </div>
 
         <div class="form-group">
+
             <label>Contraseña</label>
 
-            <input
-                type="password"
-                name="password"
-                placeholder="••••••••"
-                required>
+            <div class="password-wrapper">
+
+                <input
+                    type="password"
+                    name="password"
+                    id="passwordInput"
+                    placeholder="••••••••"
+                    required>
+
+                <button type="button" id="togglePassword">
+                    👁️
+                </button>
+
+            </div>
+
         </div>
 
-        <button type="submit" class="btn-login">
+        <div class="error-message" id="errorMessage"></div>
+
+        <button type="submit" class="btn-login" id="loginBtn">
             Ingresar
         </button>
 
