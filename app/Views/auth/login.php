@@ -1,21 +1,36 @@
-<h2>🔐 Iniciar Sesión</h2>
+<div class="login-card">
 
-<form method="POST" action="<?= BASE_URL ?>/login">
-
-    <div>
-        <label>Email</label>
-        <input type="email" name="email" required>
+    <div class="login-header">
+        <h1>Facturación PRO</h1>
+        <p>Inicia sesión para continuar</p>
     </div>
 
-    <br>
+    <form method="POST" action="<?= BASE_URL ?>/login" class="login-form">
 
-    <div>
-        <label>Password</label>
-        <input type="password" name="password" required>
-    </div>
+        <div class="form-group">
+            <label>Email</label>
 
-    <br>
+            <input
+                type="email"
+                name="email"
+                placeholder="admin@test.com"
+                required>
+        </div>
 
-    <button type="submit">Ingresar</button>
+        <div class="form-group">
+            <label>Contraseña</label>
 
-</form>
+            <input
+                type="password"
+                name="password"
+                placeholder="••••••••"
+                required>
+        </div>
+
+        <button type="submit" class="btn-login">
+            Ingresar
+        </button>
+
+    </form>
+
+</div>
