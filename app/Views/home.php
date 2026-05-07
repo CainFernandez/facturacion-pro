@@ -1,5 +1,15 @@
 <h1>📊 Dashboard</h1>
 
+<p>
+    Bienvenido:
+    <?= $_SESSION['user']['name']; ?>
+</p>
+
+<p>
+    Rol:
+    <?= $_SESSION['user']['role']; ?>
+</p>
+
 <div class="dashboard">
 
     <div class="card">

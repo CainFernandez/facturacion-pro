@@ -12,9 +12,13 @@ class HomeController extends Controller
 
         session_start();
 
+        // 🔒 proteger dashboard
         if (!isset($_SESSION['user'])) {
 
-            header('Location: /facturacion-pro/public/login');
+            header(
+                'Location: /facturacion-pro/public/login'
+            );
+
             exit;
         }
 
