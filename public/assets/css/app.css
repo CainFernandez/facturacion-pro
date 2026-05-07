@@ -1,10 +1,29 @@
+/* =========================
+   BASE
+========================= */
+
 @import url('./base/reset.css');
 @import url('./base/variables.css');
+@import url('./base/global.css');
 
-@import url('./layout/header.css');
-@import url('./layout/sidebar.css');
+/* =========================
+   LAYOUTS
+========================= */
 
-@import url('./components/card.css');
+@import url('./layouts/layout.css');
+@import url('./layouts/sidebar.css');
+@import url('./layouts/header.css');
 
-@import url('./pages/dashboard.css');
+/* =========================
+   COMPONENTS
+========================= */
+
+@import url('./components/buttons.css');
+@import url('./components/cards.css');
+
+/* =========================
+   PAGES
+========================= */
+
 @import url('./pages/auth.css');
+@import url('./pages/dashboard.css');

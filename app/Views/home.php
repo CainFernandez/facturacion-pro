@@ -1,17 +1,5 @@
 <h1>📊 Dashboard</h1>
 
-<p>
-    Bienvenido:
-    <?= $_SESSION['user']['name']; ?>
-</p>
-
-<p>
-    Rol:
-    <?= $_SESSION['user']['role']; ?>
-</p>
-<a href="<?= BASE_URL ?>/logout">
-    Cerrar sesión
-</a>
 <div class="dashboard">
 
     <div class="card">

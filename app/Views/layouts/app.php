@@ -1,15 +1,44 @@
-<?php /** @var string $viewPath */ /*✅ $viewPath es la ruta de la vista que se va a renderizar, definida en Controller.php */ ?> 
+<?php
 
-<?php require_once __DIR__ . '/../partials/header.php'; ?>
+/** @var string $viewPath */ ?>
 
-<div style="display:flex;">
+<!DOCTYPE html>
+<html lang="en">
 
-    <?php require_once __DIR__ . '/../partials/sidebar.php'; ?>
+<head>
 
-    <main style="flex:1; padding:20px;">
-        <?php require_once $viewPath; ?>
-    </main>
+    <meta charset="UTF-8">
 
-</div>
+    <title>Facturación PRO</title>
 
-<?php require_once __DIR__ . '/../partials/footer.php'; ?>
+    <link rel="stylesheet"
+        href="<?= BASE_URL ?>/assets/css/app.css">
+
+</head>
+
+<body>
+
+    <div class="app-layout">
+
+        <!-- Sidebar -->
+        <?php require_once __DIR__ . '/../partials/sidebar.php'; ?>
+
+        <div class="app-main">
+
+            <!-- Header -->
+            <?php require_once __DIR__ . '/../partials/header.php'; ?>
+
+            <!-- Content -->
+            <main class="app-content">
+
+                <?php require_once $viewPath; ?>
+
+            </main>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

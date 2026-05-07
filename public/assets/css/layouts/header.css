@@ -1,0 +1,32 @@
+.header {
+
+    height: 70px;
+
+    background: var(--white);
+
+    border-bottom: 1px solid #eee;
+
+    padding: 0 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.header-user {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.header-user a {
+
+    color: var(--danger);
+
+    font-weight: bold;
+}

@@ -1,14 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Facturación PRO</title>
-    <link rel="stylesheet" href="/facturacion-pro/public/assets/css/app.css">
-</head>
-<body>
+<header class="header">
 
-<header>
-    <h2>🚀 Facturación PRO</h2>
+    <div>
+        <h3>Dashboard</h3>
+    </div>
+
+    <div class="header-user">
+
+        <span>
+            <?= $_SESSION['user']['name']; ?>
+        </span>
+
+        <a href="<?= BASE_URL ?>/logout">
+            Logout
+        </a>
+
+    </div>
+
 </header>
-
-<div class="container"></div>

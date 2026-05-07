@@ -1,9 +1,33 @@
 <aside class="sidebar">
-    <h3 style="padding:15px;">📊 Panel</h3>
 
-    <ul>
-        <li><a href="/">Dashboard</a></li>
-        <li><a href="/usuarios">Usuarios</a></li>
-        <li><a href="/clientes">Clientes</a></li>
-    </ul>
+    <div class="sidebar-logo">
+
+        <h2>Facturación PRO</h2>
+
+    </div>
+
+    <nav class="sidebar-menu">
+
+        <a href="<?= BASE_URL ?>/dashboard">
+            Dashboard
+        </a>
+
+        <a href="#">
+            Usuarios
+        </a>
+
+        <a href="#">
+            Clientes
+        </a>
+
+        <a href="#">
+            Productos
+        </a>
+
+        <a href="#">
+            Facturación
+        </a>
+
+    </nav>
+
 </aside>
