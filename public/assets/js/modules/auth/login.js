@@ -1,3 +1,6 @@
+// helpers
+import { showError } from '../../helpers/alerts.js';
+
 // ===============================
 // 👁️ MOSTRAR / OCULTAR PASSWORD
 // ===============================
@@ -36,12 +39,10 @@ loginForm.addEventListener('submit', (e) => {
 
         e.preventDefault();
 
-        errorMessage.style.display = 'block';
-
-        errorMessage.innerText =
-            'El usuario o email es muy corto';
-
-        return;
+        showError(
+            errorMessage,
+            'El usuario o email es muy corto'
+        );
     }
 
     // 🔄 loading UX

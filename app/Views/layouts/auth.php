@@ -21,7 +21,11 @@
 
     </div>
 
-    <script src="<?= BASE_URL ?>/assets/js/auth/login.js"></script>
+    <script
+        type="module"
+        src="<?= BASE_URL ?>/assets/js/modules/auth/login.js">
+    </script>
+
 </body>
 
 </html>
