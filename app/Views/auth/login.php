@@ -1,7 +1,21 @@
-<h2>Login</h2>
+<h2>🔐 Iniciar Sesión</h2>
 
-<form>
-    <input type="email" placeholder="Email">
-    <input type="password" placeholder="Password">
-    <button>Ingresar</button>
+<form method="POST" action="<?= BASE_URL ?>/login">
+
+    <div>
+        <label>Email</label>
+        <input type="email" name="email" required>
+    </div>
+
+    <br>
+
+    <div>
+        <label>Password</label>
+        <input type="password" name="password" required>
+    </div>
+
+    <br>
+
+    <button type="submit">Ingresar</button>
+
 </form>

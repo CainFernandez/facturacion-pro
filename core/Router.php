@@ -12,6 +12,11 @@ class Router
         $this->routes['GET'][$uri] = $action;
     }
 
+    public function post($uri, $action)
+    {
+        $this->routes['POST'][$uri] = $action;
+    }
+
     public function dispatch($uri)
     {
 
@@ -19,6 +24,7 @@ class Router
 
         // limpiar URL (?id=1 etc)
         $uri = parse_url($uri, PHP_URL_PATH);
+
         // 🔥 quitar carpeta base del proyecto
         $base = '/facturacion-pro/public';
 
@@ -29,7 +35,7 @@ class Router
         if ($uri === '') {
             $uri = '/';
         }
-        
+
         if (isset($this->routes[$method][$uri])) {
 
             $action = $this->routes[$method][$uri];

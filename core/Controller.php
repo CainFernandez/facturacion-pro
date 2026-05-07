@@ -2,9 +2,11 @@
 
 namespace Core;
 
-class Controller {
+class Controller
+{
 
-    public function view($view, $data = []) {
+    public function view($view, $data = [], $layout = 'app')
+    {
 
         extract($data);
 
@@ -12,10 +14,10 @@ class Controller {
         $viewPath = __DIR__ . '/../app/Views/' . $view . '.php';
 
         if (!file_exists($viewPath)) {
-            die("Vista no encontrada: $view");
+            die("Vista no encontrada");
         }
 
         // 🔥 IMPORTANTE: incluir layout con la variable disponible
-        require __DIR__ . '/../app/Views/layouts/main.php';
+        require_once __DIR__ . '/../app/Views/layouts/' . $layout . '.php';
     }
 }
