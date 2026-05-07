@@ -9,7 +9,9 @@
     Rol:
     <?= $_SESSION['user']['role']; ?>
 </p>
-
+<a href="<?= BASE_URL ?>/logout">
+    Cerrar sesión
+</a>
 <div class="dashboard">
 
     <div class="card">

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Core\Controller;
+use App\Middlewares\AuthMiddleware;
 
 class HomeController extends Controller
 {
@@ -10,17 +11,8 @@ class HomeController extends Controller
     public function index()
     {
 
-        session_start();
-
         // 🔒 proteger dashboard
-        if (!isset($_SESSION['user'])) {
-
-            header(
-                'Location: /facturacion-pro/public/login'
-            );
-
-            exit;
-        }
+        AuthMiddleware::handle();
 
         return $this->view('home');
     }

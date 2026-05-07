@@ -82,4 +82,19 @@ class AuthController extends Controller
 
         exit;
     }
+
+    //Logout
+    public function logout()
+    {
+
+        session_start();
+
+        session_destroy();
+
+        header(
+            'Location: /facturacion-pro/public/login'
+        );
+
+        exit;
+    }
 }
