@@ -9,6 +9,9 @@
         <span>
             <?= $_SESSION['user']['name']; ?>
         </span>
+        <span>
+            <?= $_SESSION['user']['role']; ?>
+        </span>
 
         <a href="<?= BASE_URL ?>/logout">
             Logout

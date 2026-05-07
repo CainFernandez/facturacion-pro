@@ -1,0 +1,5 @@
+<h1>Usuarios</h1>
+
+<p>
+    Módulo de usuarios en construcción 🚀
+</p>

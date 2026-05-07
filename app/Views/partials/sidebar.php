@@ -12,7 +12,7 @@
             Dashboard
         </a>
 
-        <a href="#">
+        <a href="<?= BASE_URL ?>/users">
             Usuarios
         </a>
 

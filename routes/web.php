@@ -9,3 +9,7 @@ $router->get('/dashboard', 'HomeController@index');
 $router->get('/login', 'AuthController@login');
 $router->post('/login', 'AuthController@authenticate');
 $router->get('/logout', 'AuthController@logout');
+
+//Rutas para la gestión de usuarios
+$router->get('/users', 'UserController@index');
+
