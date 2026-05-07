@@ -14,16 +14,20 @@ class AuthController extends Controller
 
     public function authenticate()
     {
-
         session_start();
 
-        $email = $_POST['email'] ?? '';
+        // 🔑 login puede ser email o username
+        $login = $_POST['login'] ?? '';
+
         $password = $_POST['password'] ?? '';
 
-        // 🔥 prueba temporal
-        if ($email === 'admin@test.com' && $password === '1234') {
+        // 🔥 temporal
+        if (
+            $login === 'admin@test.com'
+            && $password === '1234'
+        ) {
 
-            $_SESSION['user'] = $email;
+            $_SESSION['user'] = $login;
 
             header('Location: /facturacion-pro/public/dashboard');
             exit;
