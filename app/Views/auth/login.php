@@ -1,0 +1,7 @@
+<h2>Login</h2>
+
+<form>
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Password">
+    <button>Ingresar</button>
+</form>
