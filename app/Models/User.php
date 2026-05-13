@@ -44,4 +44,27 @@ class User
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * 📋 Obtener todos los usuarios
+     */
+    public function getAll()
+    {
+        $sql = "
+        SELECT
+            id,
+            name,
+            username,
+            email,
+            role,
+            status,
+            created_at
+        FROM users
+        ORDER BY id DESC
+    ";
+
+        $stmt = $this->db->query($sql);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

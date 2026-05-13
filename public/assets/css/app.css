@@ -20,6 +20,7 @@
 
 @import url('./components/buttons.css');
 @import url('./components/cards.css');
+@import url('./components/tables.css');
 
 /* =========================
    PAGES
@@ -27,3 +28,4 @@
 
 @import url('./pages/auth.css');
 @import url('./pages/dashboard.css');
+@import url('./pages/users.css');
