@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Core\Controller;
 use App\Models\User;
+use App\Models\Role;
 use App\Middlewares\AuthMiddleware;
 
 class UserController extends Controller
@@ -33,7 +34,16 @@ class UserController extends Controller
     {
         AuthMiddleware::handle();
 
-        return $this->view('users/create');
+        $roleModel = new Role();
+
+        $roles = $roleModel->getAll();
+
+        return $this->view(
+            'users/create',
+            [
+                'roles' => $roles
+            ]
+        );
     }
 
     /**
@@ -47,7 +57,7 @@ class UserController extends Controller
         $username = trim($_POST['username'] ?? '');
         $email = trim($_POST['email'] ?? '');
         $password = trim($_POST['password'] ?? '');
-        $role = trim($_POST['role_id'] );
+        $roleId = (int) ($_POST['role_id'] ?? 0);
 
         // Validación básica
         if (
@@ -66,7 +76,7 @@ class UserController extends Controller
             'username' => $username,
             'email' => $email,
             'password' => password_hash($password, PASSWORD_DEFAULT),
-            'role_id' => $role
+            'role_id' => $roleId
         ]);
 
         header('Location: /facturacion-pro/public/users');
