@@ -20,23 +20,24 @@ class User
      */
     public function findByLogin($login)
     {
-
         $sql = "
-            SELECT
-                id,
-                name,
-                username,
-                email,
-                password,
-                role,
-                status
-            FROM users
-            WHERE (
-                email = :login
-                OR username = :login
-            )
-            LIMIT 1
-        ";
+        SELECT
+            u.id,
+            u.name,
+            u.username,
+            u.email,
+            u.password,
+            u.role_id,
+            r.description AS role_name,
+            u.status
+        FROM users u
+        INNER JOIN roles r ON u.role_id = r.id
+        WHERE (
+            u.email = :login
+            OR u.username = :login
+        )
+        LIMIT 1
+    ";
 
         $stmt = $this->db->query($sql, [
             ':login' => $login
@@ -52,15 +53,17 @@ class User
     {
         $sql = "
         SELECT
-            id,
-            name,
-            username,
-            email,
-            role,
-            status,
-            created_at
-        FROM users
-        ORDER BY id DESC
+            u.id,
+            u.name,
+            u.username,
+            u.email,
+            u.role_id,
+            r.description AS role_name,
+            u.status,
+            u.created_at
+        FROM users u
+        INNER JOIN roles r ON u.role_id = r.id
+        ORDER BY u.id DESC
     ";
 
         $stmt = $this->db->query($sql);

@@ -73,7 +73,7 @@ class AuthController extends Controller
 
             'email' => $user['email'],
 
-            'role' => $user['role']
+            'role_name' => $user['role_name']
         ];
 
         header(

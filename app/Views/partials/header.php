@@ -10,7 +10,7 @@
             <?= $_SESSION['user']['name']; ?>
         </span>
         <span>
-            <?= $_SESSION['user']['role']; ?>
+            <?= $_SESSION['user']['role_name']; ?>
         </span>
 
         <a href="<?= BASE_URL ?>/logout">
