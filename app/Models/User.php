@@ -70,4 +70,37 @@ class User
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * Crear usuario
+     */
+    public function create($data)
+    {
+        $sql = "
+        INSERT INTO users (
+            name,
+            username,
+            email,
+            password,
+            role_id,
+            status
+        )
+        VALUES (
+            :name,
+            :username,
+            :email,
+            :password,
+            :role_id,
+            'active'
+        )
+    ";
+
+        $this->db->query($sql, [
+            ':name' => $data['name'],
+            ':username' => $data['username'],
+            ':email' => $data['email'],
+            ':password' => $data['password'],
+            ':role_id' => $data['role_id']
+        ]);
+    }
 }

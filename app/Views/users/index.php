@@ -1,6 +1,12 @@
-<?php /** @var array $users */ ?> <!-- Oye, $users existe y es un array -->
+<?php
+
+/** @var array $users */ ?> <!-- Oye, $users existe y es un array -->
 
 <h1>Usuarios</h1>
+
+<a href="<?= BASE_URL ?>/users/create" class="btn btn-primary">
+    + Nuevo usuario
+</a>
 
 <table class="table">
 

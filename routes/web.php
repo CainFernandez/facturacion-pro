@@ -12,4 +12,5 @@ $router->get('/logout', 'AuthController@logout');
 
 //Rutas para la gestión de usuarios
 $router->get('/users', 'UserController@index');
-
+$router->get('/users/create', 'UserController@create');
+$router->post('/users', 'UserController@store');

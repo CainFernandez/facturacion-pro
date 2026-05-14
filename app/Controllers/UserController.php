@@ -25,4 +25,51 @@ class UserController extends Controller
             ]
         );
     }
+
+    /**
+     * Mostrar formulario crear usuario
+     */
+    public function create()
+    {
+        AuthMiddleware::handle();
+
+        return $this->view('users/create');
+    }
+
+    /**
+     * Guardar usuario nuevo
+     */
+    public function store()
+    {
+        AuthMiddleware::handle();
+
+        $name = trim($_POST['name'] ?? '');
+        $username = trim($_POST['username'] ?? '');
+        $email = trim($_POST['email'] ?? '');
+        $password = trim($_POST['password'] ?? '');
+        $role = trim($_POST['role_id'] );
+
+        // Validación básica
+        if (
+            empty($name) ||
+            empty($username) ||
+            empty($email) ||
+            empty($password)
+        ) {
+            die('Todos los campos son obligatorios');
+        }
+
+        $userModel = new User();
+
+        $userModel->create([
+            'name' => $name,
+            'username' => $username,
+            'email' => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'role_id' => $role
+        ]);
+
+        header('Location: /facturacion-pro/public/users');
+        exit;
+    }
 }
