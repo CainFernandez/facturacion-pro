@@ -1,41 +1,63 @@
-<?php
+<?php /** @var array $users */ ?>
 
-/** @var array $users */ ?> <!-- Oye, $users existe y es un array -->
+<div class="page-header">
 
-<h1>Usuarios</h1>
+    <div class="page-title">
+        <h1>Usuarios</h1>
+        <p>Administración de usuarios del sistema</p>
+    </div>
 
-<a href="<?= BASE_URL ?>/users/create" class="btn btn-primary">
-    + Nuevo usuario
-</a>
+    <div class="page-actions">
+        <input 
+            type="text" 
+            class="table-search" 
+            placeholder="Buscar usuario..."
+        >
 
-<table class="table">
+        <a href="<?= BASE_URL ?>/users/create" class="btn btn-primary">
+            + Nuevo usuario
+        </a>
+    </div>
 
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Usuario</th>
-            <th>Email</th>
-            <th>Rol</th>
-            <th>Estado</th>
-        </tr>
-    </thead>
+</div>
 
-    <tbody>
 
-        <?php foreach ($users as $user): ?>
+<div class="table-card">
 
+    <table class="table">
+
+        <thead>
             <tr>
-                <td><?= $user['id']; ?></td>
-                <td><?= $user['name']; ?></td>
-                <td><?= $user['username']; ?></td>
-                <td><?= $user['email']; ?></td>
-                <td><?= $user['role_name']; ?></td>
-                <td><?= $user['status']; ?></td>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Estado</th>
             </tr>
+        </thead>
 
-        <?php endforeach; ?>
+        <tbody>
 
-    </tbody>
+            <?php foreach ($users as $user): ?>
 
-</table>
+                <tr>
+                    <td><?= $user['id']; ?></td>
+                    <td><?= $user['name']; ?></td>
+                    <td><?= $user['username']; ?></td>
+                    <td><?= $user['email']; ?></td>
+                    <td><?= $user['role_name']; ?></td>
+                    <td>
+                        <span class="badge <?= $user['status'] === 'active' ? 'badge-success' : 'badge-danger'; ?>">
+                            <?= $user['status']; ?>
+                        </span>
+                    </td>
+                </tr>
+
+            <?php endforeach; ?>
+
+        </tbody>
+
+    </table>
+
+</div>

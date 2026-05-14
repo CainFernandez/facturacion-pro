@@ -1,0 +1,15 @@
+.badge{
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+.badge-success{
+    background:#e7f7ee;
+    color:var(--success);
+}
+
+.badge-danger{
+    background:#fbeaea;
+    color:var(--danger);
+}

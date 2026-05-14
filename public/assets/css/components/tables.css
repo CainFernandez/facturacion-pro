@@ -1,18 +1,52 @@
+/* =========================
+   TABLE SYSTEM
+========================= */
+
+.table-card {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-top: 20px;
+}
+
 .table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
-    border-radius: var(--radius);
-    overflow: hidden;
+    table-layout: auto;
 }
 
-.table th,
-.table td {
-    padding: 14px;
-    text-align: left;
-    border-bottom: 1px solid #eee;
+/* HEADER */
+.table thead {
+    background: #f8f9fb;
 }
 
 .table th {
-    background: #f8f9fa;
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-color);
+    border-bottom: 1px solid #e9ecef;
+    white-space: nowrap;
+}
+
+/* BODY */
+.table td {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 14px;
+    color: var(--text-color);
+    border-bottom: 1px solid #f1f1f1;
+    vertical-align: middle;
+}
+
+/* HOVER */
+.table tbody tr:hover {
+    background: #fafafa;
+}
+
+/* última fila sin línea */
+.table tbody tr:last-child td {
+    border-bottom: none;
 }

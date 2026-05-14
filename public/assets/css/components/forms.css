@@ -14,7 +14,7 @@
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    padding: 25px;
+    padding: 50px;
 }
 
 /* TITULO */
@@ -90,3 +90,11 @@
         grid-column: span 1;
     }
 }
+
+/* ESTILOS PARA BUSQUEDA EN TABLAS (REUTILIZABLE) */
+.table-search {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+

@@ -30,3 +30,24 @@
 
     font-weight: bold;
 }
+
+/* =========================
+   PAGE HEADER
+========================= */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.page-title h1 {
+    font-size: 30px;
+    margin-bottom: 4px;
+}
+
+.page-title p {
+    font-size: 15px;
+    color: var(--muted);
+}
