@@ -22,3 +22,14 @@
 
     background: var(--secondary-color);
 }
+
+.btn-danger {
+
+    background: var(--danger);
+
+    color: var(--white);
+}
+.btn-danger:hover {
+
+    background: #c0392b;
+}
