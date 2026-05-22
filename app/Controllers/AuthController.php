@@ -4,97 +4,85 @@ namespace App\Controllers;
 
 use Core\Controller;
 use App\Models\User;
+use App\Services\AuthService;
 
 class AuthController extends Controller
 {
-
     public function login()
     {
-        return $this->view(
-            'auth/login',
-            [],
-            'auth'
-        );
+        return $this->view('auth/login', [], 'auth');
     }
 
     public function authenticate()
     {
+        // detectar AJAX
+        $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 
-        session_start();
-
-        // 🔑 login puede ser email o username
-        $login = trim($_POST['login'] ?? '');
-
+        $login = trim($_POST['email'] ?? '');
         $password = trim($_POST['password'] ?? '');
 
-        // 🔍 validar campos vacíos
+        // validación básica
         if (empty($login) || empty($password)) {
-
-            die('Todos los campos son obligatorios');
+            return $this->response($isAjax, false, 'Todos los campos son obligatorios');
         }
 
-        // 🔍 buscar usuario
         $userModel = new User();
-
         $user = $userModel->findByLogin($login);
 
-        // ❌ usuario no encontrado
+        // usuario no existe
         if (!$user) {
-
-            die('Credenciales incorrectas');
+            return $this->response($isAjax, false, 'Usuario no encontrado');
         }
 
-        // 🚫 usuario desactivado
+        // usuario inactivo
         if ($user['status'] !== 'active') {
-
-            die('Usuario inactivo');
+            return $this->response($isAjax, false, 'Usuario inactivo');
         }
 
-        // 🔒 verificar password hash
-        $passwordMatch = password_verify(
-            $password,
-            $user['password']
-        );
-
-        // ❌ password incorrecta
-        if (!$passwordMatch) {
-
-            die('Credenciales incorrectas');
+        // password incorrecta
+        if (!password_verify($password, $user['password'])) {
+            return $this->response($isAjax, false, 'Contraseña incorrecta');
         }
 
-        // ✅ sesión usuario
-        $_SESSION['user'] = [
+        // sesión (centralizada)
+        AuthService::login($user);
 
-            'id' => $user['id'],
-
-            'name' => $user['name'],
-
-            'username' => $user['username'],
-
-            'email' => $user['email'],
-
-            'role_name' => $user['role_name']
-        ];
-
-        header(
-            'Location: /facturacion-pro/public/dashboard'
-        );
-
-        exit;
+        return $this->response($isAjax, true, 'Login correcto', '/dashboard');
     }
 
-    //Logout
+    /**
+     * RESPUESTA HÍBRIDA (AJAX o normal)
+     */
+    private function response($isAjax, $success, $message, $redirect = null)
+    {
+        if ($isAjax) {
+            header('Content-Type: application/json');
+
+            echo json_encode([
+                'success' => $success,
+                'message' => $message,
+                'redirect' => $redirect
+            ]);
+            exit;
+        }
+
+        if ($success && $redirect) {
+            header("Location: " . BASE_URL . $redirect);
+            exit;
+        }
+
+        die($message);
+    }
+
+    /**
+     * Cerrar sesión
+     */
     public function logout()
     {
+        AuthService::logout();
 
-        session_start();
-
-        session_destroy();
-
-        header(
-            'Location: /facturacion-pro/public/login'
-        );
-
+        header("Location: " . BASE_URL . "/login");
         exit;
     }
 }
