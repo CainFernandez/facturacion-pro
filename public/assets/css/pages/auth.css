@@ -27,7 +27,7 @@
 
 .login-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .login-header h1 {
@@ -115,34 +115,4 @@
     }
 }
 
-.password-wrapper {
-    position: relative;
-}
 
-.password-wrapper button {
-
-    position: absolute;
-
-    right: 10px;
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    border: none;
-    background: transparent;
-
-    cursor: pointer;
-
-    font-size: 16px;
-}
-
-.error-message {
-
-    color: red;
-
-    font-size: 14px;
-
-    margin-bottom: 15px;
-
-    display: none;
-}

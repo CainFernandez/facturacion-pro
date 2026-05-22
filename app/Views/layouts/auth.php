@@ -13,18 +13,18 @@
 
 </head>
 
-<body class="auth-body">
+<body class="auth-body" data-page="login"></body>
 
-    <div class="auth-container">
+<div class="auth-container">
 
-        <?php require_once $viewPath; ?>
+    <?php require_once $viewPath; ?>
 
-    </div>
+</div>
 
-    <script
-        type="module"
-        src="<?= BASE_URL ?>/assets/js/modules/auth/login.js">
-    </script>
+<script
+    type="module"
+    src="<?= BASE_URL ?>/assets/js/app.js">
+</script>
 
 </body>
 

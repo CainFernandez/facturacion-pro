@@ -5,17 +5,22 @@
         <p>Inicia sesión para continuar</p>
     </div>
 
-    <form method="POST" action="<?= BASE_URL ?>/login" class="login-form" id="loginForm">
+    <div id="alertContainer" class="alert-container"></div>
+
+    <form method="POST"
+        action="<?= BASE_URL ?>/login"
+        class="login-form"
+        id="loginForm">
 
         <div class="form-group">
             <label>Email o Usuario</label>
 
             <input
                 type="text"
-                name="login"
+                name="email"
                 id="loginInput"
                 placeholder="admin@test.com"
-                required>
+                autocomplete="username">
         </div>
 
         <div class="form-group">
@@ -29,17 +34,9 @@
                     name="password"
                     id="passwordInput"
                     placeholder="••••••••"
-                    required>
-
-                <button type="button" id="togglePassword">
-                    👁️
-                </button>
-
+                    autocomplete="current-password">
             </div>
-
         </div>
-
-        <div class="error-message" id="errorMessage"></div>
 
         <button type="submit" class="btn-login" id="loginBtn">
             Ingresar
