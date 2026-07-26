@@ -16,7 +16,7 @@
 
 </head>
 
-<body>
+<body data-page="users-create">
 
     <div class="app-layout">
 
@@ -38,6 +38,11 @@
         </div>
 
     </div>
+
+    <script
+        type="module"
+        src="<?= BASE_URL ?>/assets/js/app.js">
+    </script>
 
 </body>
 

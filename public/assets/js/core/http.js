@@ -1,4 +1,5 @@
 export async function post(url, data) {
+
     const res = await fetch(url, {
         method: "POST",
         headers: {
@@ -6,6 +7,10 @@ export async function post(url, data) {
         },
         body: data
     });
+
+    if (!res.ok) {
+        throw new Error(`Error HTTP: ${res.status}`);
+    }
 
     return await res.json();
 }

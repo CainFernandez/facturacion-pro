@@ -9,7 +9,9 @@
         <h1 class="form-title">👤 Crear nuevo usuario</h1>
         <p class="form-subtitle">Complete los datos para registrar un usuario en el sistema</p>
 
-        <form method="POST" action="<?= BASE_URL ?>/users" class="form-grid">
+        <div id="alertContainer" class="alert-container"></div>
+
+        <form id="userForm" class="form-grid">
 
             <div class="form-group">
                 <label>Nombre completo</label>

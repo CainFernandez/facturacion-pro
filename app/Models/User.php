@@ -62,17 +62,17 @@ class User
             u.status,
             u.created_at
         FROM users u
-        INNER JOIN roles r ON u.role_id = r.id
+        INNER JOIN roles r ON r.id = u.role_id
         ORDER BY u.id DESC
     ";
 
-        $stmt = $this->db->query($sql);
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->db
+            ->query($sql)
+            ->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
-     * Crear usuario
+     * ➕ Crear usuario
      */
     public function create($data)
     {
@@ -95,11 +95,14 @@ class User
         )
     ";
 
-        $this->db->query($sql, [
+        return $this->db->query($sql, [
             ':name' => $data['name'],
             ':username' => $data['username'],
             ':email' => $data['email'],
-            ':password' => $data['password'],
+            ':password' => password_hash(
+                $data['password'],
+                PASSWORD_DEFAULT
+            ),
             ':role_id' => $data['role_id']
         ]);
     }
