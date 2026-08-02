@@ -1,16 +1,54 @@
-import { storeUser } from "./users.controller.js";
+import {
+    storeUser,
+    editUser
+} from "./users.controller.js";
+
 
 export function bindUserEvents() {
 
-    const form = document.getElementById("userForm");
+    /*
+    |--------------------------------------------------------------------------
+    | Crear usuario
+    |--------------------------------------------------------------------------
+    */
 
-    if (!form) return;
+    const createForm = document.getElementById("userForm");
 
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
+    if (createForm) {
 
-        const data = new FormData(form);
+        createForm.addEventListener("submit", (e) => {
 
-        storeUser(data);
-    });
+            e.preventDefault();
+
+            const data = new FormData(createForm);
+
+            storeUser(data);
+
+        });
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Editar usuario
+    |--------------------------------------------------------------------------
+    */
+
+    const editForm = document.getElementById("userEditForm");
+
+    if (editForm) {
+
+        editForm.addEventListener("submit", (e) => {
+
+            e.preventDefault();
+
+            const data = new FormData(editForm);
+
+            editUser(data);
+
+        });
+
+    }
+
 }

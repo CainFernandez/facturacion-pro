@@ -42,7 +42,44 @@ class UserController extends Controller
         return $this->view(
             'users/create',
             [
-                'roles' => $roles
+                'roles' => $roles,
+                'page' => 'users-create'
+            ]
+        );
+    }
+    /**
+     * Mostrar formulario editar usuario
+     */
+    public function edit()
+    {
+        AuthMiddleware::handle();
+
+        $id = (int) ($_GET['id'] ?? 0);
+
+        if ($id <= 0) {
+            header('Location: /facturacion-pro/public/users');
+            exit;
+        }
+
+        $userModel = new User();
+
+        $user = $userModel->findById($id);
+
+        if (!$user) {
+            header('Location: /facturacion-pro/public/users');
+            exit;
+        }
+
+        $roleModel = new Role();
+
+        $roles = $roleModel->getAll();
+
+        return $this->view(
+            'users/edit',
+            [
+                'user'  => $user,
+                'roles' => $roles,
+                'page' => 'users-edit'
             ]
         );
     }
@@ -110,6 +147,90 @@ class UserController extends Controller
                 $isAjax,
                 false,
                 'Error interno al crear usuario'
+            );
+        }
+    }
+
+    /**
+     * Actualizar usuario
+     */
+    public function update()
+    {
+        AuthMiddleware::handle();
+
+        // Detectar AJAX
+        $isAjax = (
+            !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+        );
+
+        $id       = (int) ($_POST['id'] ?? 0);
+        $name     = trim($_POST['name'] ?? '');
+        $username = trim($_POST['username'] ?? '');
+        $email    = trim($_POST['email'] ?? '');
+        $roleId   = (int) ($_POST['role_id'] ?? 0);
+
+        // Validación básica
+        if (
+            $id <= 0 ||
+            empty($name) ||
+            empty($username) ||
+            empty($email) ||
+            $roleId <= 0
+        ) {
+            return $this->respond(
+                $isAjax,
+                false,
+                'Todos los campos son obligatorios'
+            );
+        }
+
+        $userModel = new User();
+
+        try {
+
+            // Verificar que el usuario exista
+            $user = $userModel->findById($id);
+
+            if (!$user) {
+                return $this->respond(
+                    $isAjax,
+                    false,
+                    'El usuario no existe'
+                );
+            }
+
+            // Actualizar usuario
+            $userModel->update(
+                $id,
+                [
+                    'name'     => $name,
+                    'username' => $username,
+                    'email'    => $email,
+                    'role_id'  => $roleId
+                ]
+            );
+
+            return $this->respond(
+                $isAjax,
+                true,
+                'Usuario actualizado correctamente'
+            );
+        } catch (PDOException $e) {
+
+            // Error MySQL duplicate entry (UNIQUE)
+            if ($e->getCode() == 23000) {
+                return $this->respond(
+                    $isAjax,
+                    false,
+                    'El usuario o correo ya existe'
+                );
+            }
+
+            return $this->respond(
+                $isAjax,
+                false,
+                'Error interno al actualizar usuario'
             );
         }
     }

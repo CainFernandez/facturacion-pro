@@ -106,4 +106,63 @@ class User
             ':role_id' => $data['role_id']
         ]);
     }
+
+    /**
+     * ---Editar usuario---
+     */
+
+    /**
+     * ✏️ Buscar usuario por ID
+     */
+    public function findById(int $id): ?array
+    {
+        $sql = "
+        SELECT
+            u.id,
+            u.name,
+            u.username,
+            u.email,
+            u.role_id,
+            r.description AS role_name,
+            u.status
+        FROM users u
+        INNER JOIN roles r ON r.id = u.role_id
+        WHERE u.id = :id
+        LIMIT 1
+    ";
+
+        $user = $this->db
+            ->query($sql, [
+                ':id' => $id
+            ])
+            ->fetch(PDO::FETCH_ASSOC);
+
+        return $user ?: null;
+    }
+
+    /**
+     * ✏️ Actualizar usuario
+     */
+    public function update(int $id, array $data): bool
+    {
+        $sql = "
+        UPDATE users
+        SET
+            name = :name,
+            username = :username,
+            email = :email,
+            role_id = :role_id
+        WHERE id = :id
+    ";
+
+        $this->db->query($sql, [
+            ':name'     => $data['name'],
+            ':username' => $data['username'],
+            ':email'    => $data['email'],
+            ':role_id'  => $data['role_id'],
+            ':id'       => $id
+        ]);
+
+        return true;
+    }
 }

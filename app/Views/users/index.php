@@ -1,4 +1,6 @@
-<?php /** @var array $users */ ?>
+<?php
+
+/** @var array $users */ ?>
 
 <div class="page-header">
 
@@ -8,11 +10,10 @@
     </div>
 
     <div class="page-actions">
-        <input 
-            type="text" 
-            class="table-search" 
-            placeholder="Buscar usuario..."
-        >
+        <input
+            type="text"
+            class="table-search"
+            placeholder="Buscar usuario...">
 
         <a href="<?= BASE_URL ?>/users/create" class="btn btn-primary">
             + Nuevo usuario
@@ -34,6 +35,7 @@
                 <th>Email</th>
                 <th>Rol</th>
                 <th>Estado</th>
+                <th>Acciones</th>
             </tr>
         </thead>
 
@@ -51,6 +53,13 @@
                         <span class="badge <?= $user['status'] === 'active' ? 'badge-success' : 'badge-danger'; ?>">
                             <?= $user['status']; ?>
                         </span>
+                    </td>
+                    <td>
+                        <a
+                            href="<?= BASE_URL ?>/users/edit?id=<?= $user['id'] ?>"
+                            class="btn btn-sm btn-primary">
+                            Editar
+                        </a>
                     </td>
                 </tr>
 

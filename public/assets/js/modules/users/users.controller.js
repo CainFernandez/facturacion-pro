@@ -1,4 +1,8 @@
-import { createUser } from "../../services/userService.js";
+import {
+    createUser,
+    updateUser
+} from "../../services/userService.js";
+
 import {
     startLoader,
     stopLoader,
@@ -6,11 +10,18 @@ import {
     showSuccess
 } from "./users.ui.js";
 
+
+/*
+|--------------------------------------------------------------------------
+| Crear usuario
+|--------------------------------------------------------------------------
+*/
+
 export async function storeUser(formData) {
 
     try {
 
-        startLoader();
+        startLoader("Creando usuario...");
 
         const result = await createUser(formData);
 
@@ -30,5 +41,41 @@ export async function storeUser(formData) {
         stopLoader();
 
         showError(error.message || "Error de conexión");
+
     }
+
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Actualizar usuario
+|--------------------------------------------------------------------------
+*/
+export async function editUser(formData) {
+
+    try {
+
+        startLoader("Actualizando usuario...");
+
+        const result = await updateUser(formData);
+
+        stopLoader();
+
+        if (!result.success) {
+            showError(result.message);
+            return;
+        }
+
+        showSuccess(result.message);
+
+    } catch (error) {
+
+        stopLoader();
+
+        showError(error.message || "Error de conexión");
+
+    }
+
+}
+

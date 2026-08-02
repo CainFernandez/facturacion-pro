@@ -4,3 +4,7 @@ import { BASE_URL } from "../core/config.js";
 export function createUser(data) {
     return post(`${BASE_URL}/users/store`, data);
 }
+
+export function updateUser(data) {
+    return post(`${BASE_URL}/users/update`, data);
+}

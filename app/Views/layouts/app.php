@@ -16,7 +16,7 @@
 
 </head>
 
-<body data-page="users-create">
+<body data-page="<?= htmlspecialchars($page ?? '') ?>">
 
     <div class="app-layout">
 
