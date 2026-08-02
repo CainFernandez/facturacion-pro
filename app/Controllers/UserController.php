@@ -84,7 +84,7 @@ class UserController extends Controller
                 'name'      => $name,
                 'username'  => $username,
                 'email'     => $email,
-                'password'  => password_hash($password, PASSWORD_DEFAULT),
+                'password'  => $password,
                 'role_id'   => $roleId
             ]);
 
