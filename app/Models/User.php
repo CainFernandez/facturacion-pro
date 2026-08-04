@@ -165,4 +165,23 @@ class User
 
         return true;
     }
+
+    /**
+     * 🔄 Activar / Desactivar usuario
+     */
+    public function toggleStatus(int $id, string $status): bool
+    {
+        $sql = "
+        UPDATE users
+        SET status = :status
+        WHERE id = :id
+    ";
+
+        $this->db->query($sql, [
+            ':status' => $status,
+            ':id'     => $id
+        ]);
+
+        return true;
+    }
 }

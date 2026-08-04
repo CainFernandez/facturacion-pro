@@ -236,6 +236,76 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * 🔄 Activar / Desactivar usuario
+     */
+    public function toggleStatus()
+    {
+        AuthMiddleware::handle();
+
+        // Detectar AJAX
+        $isAjax = (
+            !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+        );
+
+        $id = (int) ($_POST['id'] ?? 0);
+
+        if ($id <= 0) {
+            return $this->respond(
+                $isAjax,
+                false,
+                'ID de usuario inválido'
+            );
+        }
+
+        $userModel = new User();
+
+        try {
+
+            // Buscar usuario
+            $user = $userModel->findById($id);
+
+            if (!$user) {
+                return $this->respond(
+                    $isAjax,
+                    false,
+                    'El usuario no existe'
+                );
+            }
+
+            // Determinar nuevo estado
+            $newStatus =
+                $user['status'] === 'active'
+                ? 'inactive'
+                : 'active';
+
+            // Actualizar estado
+            $userModel->toggleStatus(
+                $id,
+                $newStatus
+            );
+
+            $message =
+                $newStatus === 'active'
+                ? 'Usuario activado correctamente'
+                : 'Usuario desactivado correctamente';
+
+            return $this->respond(
+                $isAjax,
+                true,
+                $message
+            );
+        } catch (PDOException $e) {
+
+            return $this->respond(
+                $isAjax,
+                false,
+                'Error interno al cambiar el estado del usuario'
+            );
+        }
+    }
+
 
     /**
      * Respuesta híbrida:
