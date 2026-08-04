@@ -23,7 +23,8 @@ class UserController extends Controller
         return $this->view(
             'users/index',
             [
-                'users' => $users
+                'users' => $users,
+                'page'  => 'users'
             ]
         );
     }

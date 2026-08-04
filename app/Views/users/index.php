@@ -26,7 +26,6 @@
 <div class="table-card">
 
     <table class="table">
-
         <thead>
             <tr>
                 <th>ID</th>
@@ -38,35 +37,59 @@
                 <th>Acciones</th>
             </tr>
         </thead>
-
         <tbody>
-
             <?php foreach ($users as $user): ?>
-
                 <tr>
-                    <td><?= $user['id']; ?></td>
-                    <td><?= $user['name']; ?></td>
-                    <td><?= $user['username']; ?></td>
-                    <td><?= $user['email']; ?></td>
-                    <td><?= $user['role_name']; ?></td>
-                    <td>
-                        <span class="badge <?= $user['status'] === 'active' ? 'badge-success' : 'badge-danger'; ?>">
-                            <?= $user['status']; ?>
+                    <td> <?= (int) $user['id']; ?> </td>
+                    <td> <?= htmlspecialchars($user['name']); ?> </td>
+                    <td> <?= htmlspecialchars($user['username']); ?> </td>
+                    <td> <?= htmlspecialchars($user['email']); ?> </td>
+                    <td> <?= htmlspecialchars($user['role_name']); ?> </td>
+
+                    <!-- Estado -->
+                    <td> <span
+                            class="badge <?= $user['status'] === 'active'
+                                                ? 'badge-success'
+                                                : 'badge-danger'; ?>">
+                            <?= $user['status'] === 'active'
+                                ? 'Activo'
+                                : 'Inactivo'; ?>
                         </span>
                     </td>
+
+                    <!-- Acciones -->
                     <td>
-                        <a
-                            href="<?= BASE_URL ?>/users/edit?id=<?= $user['id'] ?>"
-                            class="btn btn-sm btn-primary">
-                            Editar
+                        <!-- Editar -->
+                        <a href="<?= BASE_URL ?>/users/edit?id=<?= (int) $user['id']; ?>"
+                            class="btn btn-sm btn-primary"> Editar
                         </a>
+
+                        <!-- Activar / Desactivar -->
+                        <?php if ($user['status'] === 'active'): ?>
+
+                            <button
+                                type="button" class="btn btn-sm btn-danger btn-toggle-status"
+                                data-id="<?= (int) $user['id']; ?>"
+                                data-status="inactive"
+                                data-name="<?= htmlspecialchars($user['name']); ?>">
+                                Desactivar
+                            </button>
+
+                        <?php else: ?>
+
+                            <button
+                                type="button" class="btn btn-sm btn-success btn-toggle-status"
+                                data-id="<?= (int) $user['id']; ?>"
+                                data-status="active"
+                                data-name="<?= htmlspecialchars($user['name']); ?>">
+                                Activar
+                            </button>
+
+                        <?php endif; ?>
                     </td>
                 </tr>
-
             <?php endforeach; ?>
-
         </tbody>
-
     </table>
 
 </div>

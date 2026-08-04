@@ -17,6 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    if (page === "users") {
+        loadUsersPage();
+    }
+
+
     if (page === "users-create") {
         loadUsersPage();
     }
