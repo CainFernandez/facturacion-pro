@@ -1,7 +1,8 @@
 import {
     storeUser,
     editUser,
-    changeUserStatus
+    changeUserStatus,
+    searchUsersController
 } from "./users.controller.js";
 
 import { showConfirmModal } from "../../components/modal.js";
@@ -54,19 +55,60 @@ export function bindUserEvents() {
 
     }
 
-
     /*
     |--------------------------------------------------------------------------
-    | Activar / Desactivar usuario
+    | Buscar usuario en tiempo real
     |--------------------------------------------------------------------------
     */
+    const searchInput =
+        document.getElementById("userSearch");
 
-    const statusButtons =
-        document.querySelectorAll(".btn-toggle-status");
+    let searchTimeout = null;
 
-    statusButtons.forEach((button) => {
+    if (searchInput) {
 
-        button.addEventListener("click", () => {
+        searchInput.addEventListener("input", () => {
+
+            const search =
+                searchInput.value.trim();
+
+
+            // Cancelar búsqueda anterior
+            clearTimeout(searchTimeout);
+
+
+            // Esperar 300 ms antes de buscar
+            searchTimeout = setTimeout(() => {
+
+                searchUsersController(search);
+
+            }, 300);
+
+        });
+
+    }
+
+
+    /*
+  |--------------------------------------------------------------------------
+  | Activar / Desactivar usuario
+  |--------------------------------------------------------------------------
+  */
+
+    const usersTableBody =
+        document.getElementById("usersTableBody");
+
+    if (usersTableBody) {
+
+        usersTableBody.addEventListener("click", (e) => {
+
+            const button =
+                e.target.closest(".btn-toggle-status");
+
+            // Si el clic no fue sobre un botón de estado
+            if (!button) {
+                return;
+            }
 
             const id =
                 button.dataset.id;
@@ -96,8 +138,8 @@ export function bindUserEvents() {
 
             const message =
                 isActivating
-                    ? `¿Está seguro de activar al usuario "${name}" ? `
-                    : `¿Está seguro de desactivar al usuario "${name}" ? `;
+                    ? `¿Está seguro de activar al usuario "${name}"?`
+                    : `¿Está seguro de desactivar al usuario "${name}"?`;
 
 
             const confirmText =
@@ -142,9 +184,11 @@ export function bindUserEvents() {
                         status
                     );
 
+
                     if (!success) {
                         return;
                     }
+
 
                     /*
                     |--------------------------------------------------------------------------
@@ -156,13 +200,17 @@ export function bindUserEvents() {
                         `.user-status[data-user-id="${id}"]`
                     );
 
+
                     if (!statusElement) {
+
                         console.error(
                             "No se encontró el estado del usuario:",
                             id
                         );
+
                         return;
                     }
+
 
                     /*
                     |--------------------------------------------------------------------------
@@ -190,6 +238,7 @@ export function bindUserEvents() {
 
                     }
 
+
                     /*
                     |--------------------------------------------------------------------------
                     | Usuario desactivado
@@ -216,11 +265,12 @@ export function bindUserEvents() {
                     }
 
                 }
+
             });
 
         });
 
-    });
+    }
 
 }
 

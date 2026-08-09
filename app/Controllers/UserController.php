@@ -30,6 +30,49 @@ class UserController extends Controller
     }
 
     /**
+     * 🔍 Buscar usuarios
+     */
+    public function search()
+    {
+        AuthMiddleware::handle();
+
+        $isAjax = (
+            !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+        );
+
+        $search = trim($_GET['q'] ?? '');
+
+        $userModel = new User();
+
+        try {
+
+            // Si no hay búsqueda, obtener todos
+            if ($search === '') {
+                $users = $userModel->getAll();
+            } else {
+                $users = $userModel->search($search);
+            }
+
+            return $this->respond(
+                $isAjax,
+                true,
+                'Usuarios encontrados',
+                [
+                    'users' => $users
+                ]
+            );
+        } catch (PDOException $e) {
+
+            return $this->respond(
+                $isAjax,
+                false,
+                'Error al buscar usuarios'
+            );
+        }
+    }
+
+    /**
      * Mostrar formulario crear usuario
      */
     public function create()
@@ -315,15 +358,22 @@ class UserController extends Controller
      * AJAX => JSON
      * Normal => redirect
      */
-    private function respond(bool $isAjax, bool $success, string $message)
-    {
+    private function respond(
+        bool $isAjax,
+        bool $success,
+        string $message,
+        array $data = []
+    ) {
         if ($isAjax) {
+
             header('Content-Type: application/json');
 
             echo json_encode([
                 'success' => $success,
-                'message' => $message
+                'message' => $message,
+                ...$data
             ]);
+
             exit;
         }
 

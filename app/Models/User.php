@@ -16,7 +16,7 @@ class User
     }
 
     /**
-     * 🔍 Buscar usuario por email o username
+     * 🔍 Buscar usuario por email o username login.
      */
     public function findByLogin($login)
     {
@@ -68,6 +68,37 @@ class User
 
         return $this->db
             ->query($sql)
+            ->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * 🔍 Buscar usuarios
+     */
+    public function search(string $search): array
+    {
+        $sql = "
+        SELECT
+            u.id,
+            u.name,
+            u.username,
+            u.email,
+            u.role_id,
+            r.description AS role_name,
+            u.status,
+            u.created_at
+        FROM users u
+        INNER JOIN roles r ON r.id = u.role_id
+        WHERE
+            u.name LIKE :search
+            OR u.username LIKE :search
+            OR u.email LIKE :search
+        ORDER BY u.id DESC
+    ";
+
+        return $this->db
+            ->query($sql, [
+                ':search' => '%' . $search . '%'
+            ])
             ->fetchAll(PDO::FETCH_ASSOC);
     }
 

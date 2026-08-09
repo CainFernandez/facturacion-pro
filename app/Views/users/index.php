@@ -12,6 +12,7 @@
     <div class="page-actions">
         <input
             type="text"
+            id="userSearch"
             class="table-search"
             placeholder="Buscar usuario...">
 
@@ -37,7 +38,7 @@
                 <th>Acciones</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="usersTableBody">
             <?php foreach ($users as $user): ?>
                 <tr>
                     <td> <?= (int) $user['id']; ?> </td>
@@ -53,9 +54,8 @@
                             <?= $user['status'] === 'active'
                                 ? 'badge-success'
                                 : 'badge-danger'; ?>"
-                                
-                            data-user-id="<?= (int) $user['id']; ?>"
-                        >
+
+                            data-user-id="<?= (int) $user['id']; ?>">
 
                             <?= $user['status'] === 'active'
                                 ? 'Activo'

@@ -1,14 +1,16 @@
 import {
     createUser,
     updateUser,
-    toggleUserStatus
+    toggleUserStatus,
+    searchUsers
 } from "../../services/userService.js";
 
 import {
     startLoader,
     stopLoader,
     showError,
-    showSuccess
+    showSuccess,
+    renderUsers
 } from "./users.ui.js";
 
 
@@ -41,10 +43,12 @@ export async function storeUser(formData) {
 
         stopLoader();
 
-        showError(error.message || "Error de conexión");
+        showError(
+            error.message ||
+            "Error de conexión"
+        );
 
     }
-
 }
 
 
@@ -53,6 +57,7 @@ export async function storeUser(formData) {
 | Actualizar usuario
 |--------------------------------------------------------------------------
 */
+
 export async function editUser(formData) {
 
     try {
@@ -74,17 +79,21 @@ export async function editUser(formData) {
 
         stopLoader();
 
-        showError(error.message || "Error de conexión");
+        showError(
+            error.message ||
+            "Error de conexión"
+        );
 
     }
-
 }
+
 
 /*
 |--------------------------------------------------------------------------
 | Activar / Desactivar usuario
 |--------------------------------------------------------------------------
 */
+
 export async function changeUserStatus(id, status) {
 
     try {
@@ -125,3 +134,33 @@ export async function changeUserStatus(id, status) {
 }
 
 
+/*
+|--------------------------------------------------------------------------
+| Buscar usuarios
+|--------------------------------------------------------------------------
+*/
+
+export async function searchUsersController(search) {
+
+    try {
+
+        const result = await searchUsers(search);
+
+        if (!result.success) {
+
+            showError(result.message);
+
+            return;
+        }
+
+        renderUsers(result.users);
+
+    } catch (error) {
+
+        showError(
+            error.message ||
+            "Error de conexión"
+        );
+
+    }
+}
