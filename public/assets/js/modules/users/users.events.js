@@ -1,6 +1,7 @@
 import {
     storeUser,
-    editUser
+    editUser,
+    changeUserStatus
 } from "./users.controller.js";
 
 import { showConfirmModal } from "../../components/modal.js";
@@ -136,14 +137,85 @@ export function bindUserEvents() {
 
                 onConfirm: async () => {
 
-                    console.log("ID:", id);
+                    const success = await changeUserStatus(
+                        id,
+                        status
+                    );
 
-                    console.log("Nuevo estado:", status);
+                    if (!success) {
+                        return;
+                    }
 
-                    console.log("Usuario:", name);
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Buscar estado de la misma fila
+                    |--------------------------------------------------------------------------
+                    */
+
+                    const statusElement = document.querySelector(
+                        `.user-status[data-user-id="${id}"]`
+                    );
+
+                    if (!statusElement) {
+                        console.error(
+                            "No se encontró el estado del usuario:",
+                            id
+                        );
+                        return;
+                    }
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Usuario activado
+                    |--------------------------------------------------------------------------
+                    */
+
+                    if (status === "active") {
+
+                        // Cambiar texto del estado
+                        statusElement.textContent = "Activo";
+
+                        // Cambiar clases del estado
+                        statusElement.classList.remove("badge-danger");
+                        statusElement.classList.add("badge-success");
+
+                        // Cambiar botón
+                        button.textContent = "Desactivar";
+
+                        button.classList.remove("btn-success");
+                        button.classList.add("btn-danger");
+
+                        // Próxima acción
+                        button.dataset.status = "inactive";
+
+                    }
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Usuario desactivado
+                    |--------------------------------------------------------------------------
+                    */
+
+                    else {
+
+                        // Cambiar texto del estado
+                        statusElement.textContent = "Inactivo";
+
+                        // Cambiar clases del estado
+                        statusElement.classList.remove("badge-success");
+                        statusElement.classList.add("badge-danger");
+
+                        // Cambiar botón
+                        button.textContent = "Activar";
+
+                        button.classList.remove("btn-danger");
+                        button.classList.add("btn-success");
+
+                        // Próxima acción
+                        button.dataset.status = "active";
+                    }
 
                 }
-
             });
 
         });

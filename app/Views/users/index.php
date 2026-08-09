@@ -47,13 +47,20 @@
                     <td> <?= htmlspecialchars($user['role_name']); ?> </td>
 
                     <!-- Estado -->
-                    <td> <span
-                            class="badge <?= $user['status'] === 'active'
-                                                ? 'badge-success'
-                                                : 'badge-danger'; ?>">
+                    <td>
+                        <span
+                            class="badge user-status
+                            <?= $user['status'] === 'active'
+                                ? 'badge-success'
+                                : 'badge-danger'; ?>"
+                                
+                            data-user-id="<?= (int) $user['id']; ?>"
+                        >
+
                             <?= $user['status'] === 'active'
                                 ? 'Activo'
-                                : 'Inactivo'; ?>
+                                : 'Inactivo';
+                            ?>
                         </span>
                     </td>
 

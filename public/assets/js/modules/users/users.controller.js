@@ -1,6 +1,7 @@
 import {
     createUser,
-    updateUser
+    updateUser,
+    toggleUserStatus
 } from "../../services/userService.js";
 
 import {
@@ -78,4 +79,49 @@ export async function editUser(formData) {
     }
 
 }
+
+/*
+|--------------------------------------------------------------------------
+| Activar / Desactivar usuario
+|--------------------------------------------------------------------------
+*/
+export async function changeUserStatus(id, status) {
+
+    try {
+
+        startLoader("Actualizando estado...");
+
+        const data = new FormData();
+
+        data.append("id", id);
+        data.append("status", status);
+
+        const result = await toggleUserStatus(data);
+
+        stopLoader();
+
+        if (!result.success) {
+
+            showError(result.message);
+
+            return false;
+        }
+
+        showSuccess(result.message);
+
+        return true;
+
+    } catch (error) {
+
+        stopLoader();
+
+        showError(
+            error.message ||
+            "Error de conexión"
+        );
+
+        return false;
+    }
+}
+
 

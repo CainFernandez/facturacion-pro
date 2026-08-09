@@ -8,3 +8,10 @@ export function createUser(data) {
 export function updateUser(data) {
     return post(`${BASE_URL}/users/update`, data);
 }
+
+export function toggleUserStatus(data) {
+    return post(
+        `${BASE_URL}/users/toggle-status`,
+        data
+    );
+}

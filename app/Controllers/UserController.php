@@ -243,14 +243,15 @@ class UserController extends Controller
     {
         AuthMiddleware::handle();
 
-        // Detectar AJAX
         $isAjax = (
             !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
             strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
         );
 
         $id = (int) ($_POST['id'] ?? 0);
+        $status = $_POST['status'] ?? '';
 
+        // Validar ID
         if ($id <= 0) {
             return $this->respond(
                 $isAjax,
@@ -259,11 +260,20 @@ class UserController extends Controller
             );
         }
 
+        // Validar estado
+        if (!in_array($status, ['active', 'inactive'], true)) {
+            return $this->respond(
+                $isAjax,
+                false,
+                'Estado de usuario inválido'
+            );
+        }
+
         $userModel = new User();
 
         try {
 
-            // Buscar usuario
+            // Verificar que el usuario exista
             $user = $userModel->findById($id);
 
             if (!$user) {
@@ -274,20 +284,13 @@ class UserController extends Controller
                 );
             }
 
-            // Determinar nuevo estado
-            $newStatus =
-                $user['status'] === 'active'
-                ? 'inactive'
-                : 'active';
-
             // Actualizar estado
             $userModel->toggleStatus(
                 $id,
-                $newStatus
+                $status
             );
 
-            $message =
-                $newStatus === 'active'
+            $message = $status === 'active'
                 ? 'Usuario activado correctamente'
                 : 'Usuario desactivado correctamente';
 
